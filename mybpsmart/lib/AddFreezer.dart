@@ -64,7 +64,3 @@ class _AddFreezerState extends State<AddFreezer> {
     ));
   }
 }
-
-class FirebaseAuht {
-  static var instance;
-}
