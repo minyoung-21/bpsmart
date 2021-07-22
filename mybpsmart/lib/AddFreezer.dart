@@ -20,10 +20,7 @@ class _AddFreezerState extends State<AddFreezer> {
   final Future<FirebaseApp> _future = Firebase.initializeApp();
 
   void addData(String useruid, String data) {
-    databaseRef
-        .child(useruid)
-        .child(data)
-        .set({'bpdata': data}).asStream();
+    databaseRef.child(useruid).child(data).set({'bpdata': data}).asStream();
   }
 
   late DatabaseReference _freezerref;
@@ -66,4 +63,8 @@ class _AddFreezerState extends State<AddFreezer> {
       ),
     ));
   }
+}
+
+class FirebaseAuht {
+  static var instance;
 }
