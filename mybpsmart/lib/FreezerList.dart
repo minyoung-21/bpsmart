@@ -61,8 +61,8 @@ class _FreezerListState extends State<FreezerList> {
           title: Text('Freezer List'),
         ),
         body: SingleChildScrollView(
-            child: Flexible(
-                child: new FirebaseAnimatedList(
+            child: Column(
+                children:[ new FirebaseAnimatedList(
           shrinkWrap: true,
           query: _freezerref,
           itemBuilder: (BuildContext context, DataSnapshot snapshot,
@@ -78,6 +78,6 @@ class _FreezerListState extends State<FreezerList> {
               ),
             );
           },
-        ))));
+        )])));
   }
 }
