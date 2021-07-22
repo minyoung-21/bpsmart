@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mybpsmart/finddevice.dart';
 import './ActionBut.dart';
-import 'package:flutter_blue/flutter_blue.dart'; //bluetooth
 import 'package:pedometer/pedometer.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
@@ -127,7 +127,15 @@ class _FreezerInfoState extends State<FreezerInfo> {
                             : _status == 'stopped'
                                 ? Icons.accessibility_new //3
                                 : Icons.error,
-                      )
+                      ),
+                      RaisedButton(
+                        child: Text('Trigger your data'),
+                        onPressed: () {
+                        Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (builder) => FlutterBlueApp()),
+                        (route) => false);
+                      })
                     ],
                   )
                 ]),
