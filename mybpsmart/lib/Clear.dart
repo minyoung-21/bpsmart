@@ -43,8 +43,8 @@ class _ClearListState extends State<ClearList> {
           title: Text('Freezer List'),
         ),
         body: SingleChildScrollView(
-            child: Flexible(
-                child: new FirebaseAnimatedList(
+            child: Column(
+                children:[new FirebaseAnimatedList(
           shrinkWrap: true,
           query: _bpref,
           itemBuilder: (BuildContext context, DataSnapshot snapshot,
@@ -58,6 +58,6 @@ class _ClearListState extends State<ClearList> {
               ),
             );
           },
-        ))));
+        )])));
   }
 }
