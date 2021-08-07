@@ -40,7 +40,7 @@ class _ClearListState extends State<ClearList> {
     return Scaffold(
         drawer: ActionBut(),
         appBar: AppBar(
-          title: Text('Freezer List'),
+          title: Text('Clear backpack'),
         ),
         body: SingleChildScrollView(
             child: Column(

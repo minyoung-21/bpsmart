@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:mybpsmart/FreezerInfo.dart';
+import 'package:mybpsmart/service.dart';
 import 'Auth_Service.dart';
 import 'HomePage.dart';
 import 'SignUpPage.dart';

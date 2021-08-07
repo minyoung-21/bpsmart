@@ -4,16 +4,52 @@
 
 import 'dart:async';
 import 'dart:math';
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
+import 'package:mybpsmart/ActionBut.dart';
 import 'package:mybpsmart/service.dart';
 import './widgets.dart';
 
-class FlutterBlueApp extends StatelessWidget {
+class FlutterBlueApp extends StatefulWidget {
+  final String freezertitle;
+  const FlutterBlueApp({Key? key, required this.freezertitle})
+      : super(key: key);
+
+  @override
+  _FlutterBlueAppState createState() => _FlutterBlueAppState(this.freezertitle);
+}
+
+class _FlutterBlueAppState extends State<FlutterBlueApp> {
+  late final String retrievedName;
+  final uid = FirebaseAuth.instance.currentUser!.uid;
+  _FlutterBlueAppState(this.retrievedName);
+  late DatabaseReference _freezerref;
+  late DataSnapshot data;
+  DatabaseReference db = FirebaseDatabase.instance.reference();
+
+  void initState() {
+    super.initState();
+    final FirebaseDatabase database = FirebaseDatabase();
+    _freezerref = db.reference().child(uid);
+  }
+
+  void prints() {
+    _freezerref.child(uid).once().then((DataSnapshot data) {
+      setState(() {
+        retrievedName = data.key;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: ActionBut(),
+      appBar: AppBar(
+        title: Text(this.retrievedName),
+      ),
       body: StreamBuilder<BluetoothState>(
           stream: FlutterBlue.instance.state,
           initialData: BluetoothState.unknown,
@@ -64,9 +100,6 @@ class FindDevicesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Find Devices'),
-      ),
       body: RefreshIndicator(
         onRefresh: () =>
             FlutterBlue.instance.startScan(timeout: Duration(seconds: 4)),
@@ -90,10 +123,12 @@ class FindDevicesScreen extends StatelessWidget {
                                     BluetoothDeviceState.connected) {
                                   return RaisedButton(
                                     child: Text('OPEN'),
-                                    onPressed: () => Navigator.of(context).push(
+                                    onPressed: () => Navigator.of(context).pushAndRemoveUntil(
                                         MaterialPageRoute(
-                                            builder: (context) =>
-                                                DeviceScreen(device: d))),
+                                            builder: (builder) =>
+                                                DeviceScreen(device: d)),
+                                                (route)=>false
+                                                ),
                                   );
                                 }
                                 return Text(snapshot.data.toString());
@@ -111,11 +146,11 @@ class FindDevicesScreen extends StatelessWidget {
                       .map(
                         (r) => ScanResultTile(
                           result: r,
-                          onTap: () => Navigator.of(context)
-                              .push(MaterialPageRoute(builder: (context) {
+                          onTap: () => Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(builder: (builder) {
                             r.device.connect();
                             return SensorPage(device: r.device);
-                          })),
+                          }), (route) => false),
                         ),
                       )
                       .toList(),

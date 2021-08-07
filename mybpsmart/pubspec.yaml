@@ -32,10 +32,10 @@ dependencies:
   flutter_secure_storage: ^4.2.0
   otp_text_field: ^1.1.1
   firebase_database: "^6.0.0"
-  percent_indicator: "^2.1.7+2"
   pedometer: ^3.0.0
   flutter_blue: ^0.8.0
   bluetooth_enable: ^0.1.1
+  syncfusion_flutter_gauges: ^19.2.48
 
 
   # The following adds the Cupertino Icons font to your application.

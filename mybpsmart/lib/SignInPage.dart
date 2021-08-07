@@ -5,6 +5,8 @@ import './SignUpPage.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 
+import 'PhoneAuthPage.dart';
+
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
 
@@ -51,7 +53,10 @@ class _SignInPageState extends State<SignInPage> {
             SizedBox(
               height: 15,
             ),
-            buttonitem("assets/phone.svg", "Phone", 30, () {}),
+            buttonitem("assets/phone.svg", "Phone", 30, () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (builder) => PhoneAuthPage()));
+            }),
             SizedBox(
               height: 15,
             ),

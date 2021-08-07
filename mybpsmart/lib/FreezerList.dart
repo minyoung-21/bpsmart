@@ -6,6 +6,7 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:firebase_database/firebase_database.dart';
+import 'package:mybpsmart/finddevice.dart';
 import './ActionBut.dart';
 import './FreezerInfo.dart';
 
@@ -44,7 +45,7 @@ class _FreezerListState extends State<FreezerList> {
         Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-                builder: (builder) => FreezerInfo(
+                builder: (builder) => FlutterBlueApp(
                       freezertitle: y,
                     )),
             (route) => false);
@@ -58,7 +59,7 @@ class _FreezerListState extends State<FreezerList> {
     return Scaffold(
         drawer: ActionBut(),
         appBar: AppBar(
-          title: Text('Freezer List'),
+          title: Text('Backpack List'),
         ),
         body: SingleChildScrollView(
             child: Column(
